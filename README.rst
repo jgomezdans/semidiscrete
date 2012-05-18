@@ -3,7 +3,11 @@ semidiscrete
 
 Python bindings for the semidiscrete RT model of Gobron et al.
 
-Note this version includes adjoint code developed by P Lewis and J Gómez-Dans.
+Note this version includes adjoint code developed by N Gobron, T Kaminski, 
+P Lewis and J Gómez-Dans derived from the original NADIM/semidiscrete. These
+modifications were funded by the ESA `EOLDAS <http://www.assimila.eu/eoldas>`_
+project.
+
 The original semidiscrete code can be found `here <http://fapar.jrc.ec.europa.eu/WWW/Data/Pages/FAPAR_Software/FAPAR_Software_RTModels_1-2Discrete.php>`_
 
 The copyright for the original code is
