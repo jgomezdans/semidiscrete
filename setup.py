@@ -31,7 +31,7 @@ if __name__ == "__main__":
     MAINTAINER_EMAIL = "j.gomez-dans@ucl.ac.uk"
     URL = 'http://github.com/jgomezdans/semidiscrete'
     LICENSE = 'Undecided'
-    VERSION = "1.0"
+    VERSION = "1.0.1"
     DOWNLOAD_URL="https://github.com/jgomezdans/semidiscrete/zipball/master"
     setup ( configuration = configuration,
         name=DISTNAME,
