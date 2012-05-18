@@ -4,7 +4,7 @@ semidiscrete
 Python bindings for the semidiscrete RT model of Gobron et al.
 
 Note this version includes adjoint code developed by N Gobron, T Kaminski, 
-P Lewis and J Gómez-Dans derived from the original NADIM/semidiscrete. These
+P Lewis and J Gomez-Dans derived from the original NADIM/semidiscrete. These
 modifications were funded by the ESA `EOLDAS <http://www.assimila.eu/eoldas>`_
 project.
 
@@ -13,7 +13,7 @@ The original semidiscrete code can be found `here <http://fapar.jrc.ec.europa.eu
 The copyright for the original code is
 
     Copyrights
-    © Nadine Gobron, Bernard Pinty, and Michel M. Verstraete 1997 The copyrights for these 8 files, including the computer codes, remain with their authors, Drs. Nadine Gobron, Bernard Pinty and Michel M. Verstraete.
+    (c) Nadine Gobron, Bernard Pinty, and Michel M. Verstraete 1997 The copyrights for these 8 files, including the computer codes, remain with their authors, Drs. Nadine Gobron, Bernard Pinty and Michel M. Verstraete.
 
     Academic users
     You are authorized to use this code for your research and teaching, but you must acknowledge use of this routine explicitly and refer to the paper above in any publication or work for which you used these codes. 
