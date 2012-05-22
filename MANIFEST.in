@@ -1,2 +1,2 @@
 include README.txt
-recursive-include semidiscrete/*
+recursive-include semidiscrete *py *pyf *f90 *f

@@ -2,7 +2,6 @@ from numpy.distutils.core import setup
 
 import sys, os
 
-version = '1.0'
 
 def configuration ( parent_package='', top_path=None ):
     from numpy.distutils.misc_util import Configuration
@@ -31,7 +30,7 @@ if __name__ == "__main__":
     MAINTAINER_EMAIL = "j.gomez-dans@ucl.ac.uk"
     URL = 'http://github.com/jgomezdans/semidiscrete'
     LICENSE = 'Undecided'
-    VERSION = "1.0.1"
+    VERSION = "1.0.2"
     DOWNLOAD_URL="https://github.com/jgomezdans/semidiscrete/zipball/master"
     setup ( configuration = configuration,
         name=DISTNAME,
