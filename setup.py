@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     DISTNAME = 'semidiscrete'
     DESCRIPTION = 'semidiscrete python wrappers'
-    LONG_DESCRIPTION = open('README.rst').read()
+    LONG_DESCRIPTION = open('README.txt').read()
     MAINTAINER = 'Jose Gomez-Dans/NCEO & University College London'
     MAINTAINER_EMAIL = "j.gomez-dans@ucl.ac.uk"
     URL = 'http://github.com/jgomezdans/semidiscrete'
