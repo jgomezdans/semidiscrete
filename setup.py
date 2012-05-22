@@ -30,12 +30,13 @@ if __name__ == "__main__":
     MAINTAINER_EMAIL = "j.gomez-dans@ucl.ac.uk"
     URL = 'http://github.com/jgomezdans/semidiscrete'
     LICENSE = 'Undecided'
-    VERSION = "1.0.2"
+    VERSION = "1.0.3"
     DOWNLOAD_URL="https://github.com/jgomezdans/semidiscrete/zipball/master"
     setup ( configuration = configuration,
         name=DISTNAME,
         maintainer=MAINTAINER,
-        include_package_data=True,
+	packages=['semidiscrete'],
+        package_dir={'semidiscrete': 'semidiscrete'},
         maintainer_email=MAINTAINER_EMAIL,
         description=DESCRIPTION,
         license=LICENSE,
@@ -43,7 +44,6 @@ if __name__ == "__main__":
         version=VERSION,
         download_url=DOWNLOAD_URL,
         long_description=LONG_DESCRIPTION,
-        zip_safe=False, # the package can run out of an .egg file
         classifiers=[
             'Intended Audience :: Science/Research',
             'Intended Audience :: Developers',
@@ -56,7 +56,7 @@ if __name__ == "__main__":
             'Operating System :: POSIX',
             'Operating System :: Unix',
             'Operating System :: MacOS'
-            ], packages=["semidiscrete"]
+            ]
     )
        
     
