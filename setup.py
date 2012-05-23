@@ -6,7 +6,7 @@ version = '1.0'
 
 def configuration ( parent_package='', top_path=None ):
     from numpy.distutils.misc_util import Configuration
-    config = Configuration(parent_package,top_path, )
+    config = Configuration('semidiscrete',parent_package,top_path, )
     
     config.add_extension ('rtmodel_ad_trans2', 
         sources = ['semidiscrete/rtmodel_ad_trans2.pyf', \
@@ -24,7 +24,7 @@ sys.argv.extend ( ["config_fc", "--fcompiler=gnu95",
         #"--f90exec=/usr/bin/gfortran44", 
         "--f77flags='-ffixed-form -ffixed-line-length-none'" ])
 
-DISTNAME = 'SemiDiscrete'
+DISTNAME = 'semidiscrete'
 DESCRIPTION = 'SemiDiscrete python wrappers'
 LONG_DESCRIPTION = open('README.txt').read()
 MAINTAINER = 'Jose Gomez-Dans/NCEO & University College London'
@@ -43,6 +43,8 @@ setup ( configuration = configuration,
     version=VERSION,
     download_url=DOWNLOAD_URL,
     long_description=LONG_DESCRIPTION,
+    packages=['semidiscrete'],
+    package_dir={'semidiscrete': 'semidiscrete'},
     classifiers=[
         'Intended Audience :: Science/Research',
         'Intended Audience :: Developers',
