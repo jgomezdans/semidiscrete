@@ -1270,10 +1270,14 @@ c----------------------------------------------
         do j = 1, number/2
           x = xm+xr*points(j)
           if (abs(x) .ne. xmu0) then
+	print*,'666',i00,xgama_0(j,:),xmu0,g0,xmu0,xl,exp(-(g0/xmu0*xl))
+	    print*,'667',gg(j,:),
+     $exp(-(gg(j,:)/abs(x)*xl)),(gg(j,:)*xmu0-g0*abs(x))
             xi(k,j,:) = 
      $i00*2.*xgama_0(j,:)*xmu0*(exp(-(g0/xmu0*xl))-exp(-(
      $gg(j,:)/abs(x)*xl)))/(gg(j,:)*xmu0-g0*abs(x))
           else
+	    print*,'777',i00,xl,xgama_0(j,:),exp(-(g0/xmu0*xl)),xmu0
             xi(k,j,:) = i00*xl*2.*xgama_0(j,:)*exp(-(g0/xmu0*xl))/xmu0
           endif
         end do
@@ -1282,6 +1286,9 @@ c----------------------------------------------
         xl = float(k-1)*dl
         do j = number/2+1, number
           x = xm+xr*points(j)
+	  print*,'999',i00,xgama_0(j,:),xmu0,exp(-(g0/xmu0*xl))
+	  print*,'1000',exp(-(gg(j,:)/x*(lai(1:nw)-xl)))
+	  print*,'1001',exp(-(g0/xmu0*lai(1:nw))),(g0*x+gg(j,:)*xmu0)
           xi(k,j,:) = 
      $i00*2.*xgama_0(j,:)*xmu0*(exp(-(g0/xmu0*xl))-exp(-(gg(
      $j,:)/x*(lai(1:nw)-xl)))*
@@ -1785,6 +1792,10 @@ c**********************************************
           endif
         end do
       end do
+      print*,'*1**',maxval(xi),minval(xi)
+      print*,'*1a*',maxloc(xi),minloc(xi)
+
+
       xi1 = 0.
       do j = 1, number/2
         x = xm+xr*points(j)
@@ -1794,7 +1805,15 @@ c**********************************************
         xl = float(k-1)*dl
         do j = number/2+1, number
           x = xm+xr*points(j)
-          xi(k,j,:) = i00*2.*xgama_0(j,:)*
+	  if (j == 16) then
+	   print*,'*C1',gg(j,:)
+	   print*,'*C2',x
+	   print*,'*C3',gg(j,:)/x
+	   print*,'*C4',(lai(1:nw)-xl)
+	   print*,'**4',-((gg(j,:)/x)*(lai(1:nw)-xl))
+	   print*,'*C5',exp(-((gg(j,:)/x)*(lai(1:nw)-xl)))
+	  endif
+          xi(k,j,1:nw) = i00*2.*xgama_0(j,:)*
      $xmu0*(exp(-(g0/xmu0*xl))-exp(-(gg(
      $j,:)/x*(lai(1:nw)-xl)))*exp(-(g0/xmu0*lai(1:nw))))
      $/(g0*x+gg(j,:)*xmu0)
@@ -1803,8 +1822,14 @@ c**********************************************
      $-exp(-(gg(j,:)/x*(lai(1:nw)-xl)))*
      $exp(-(g0/xmu0*lai(1:nw))))/(g0*x+gg(j,:)
      $*xmu0)
+        xi(k,j,1:nw) = amin1(1000.,amax1(-1000.,xi(k,j,1:nw)))
+	xi1u(k,j,1:nw) = amin1(1000.,amax1(-1000.,xi1u(k,j,1:nw)))
+	  print*,'***C5',j,k,xi(k,j,:),xi1u(k,j,:)
         end do
       end do
+      print*,'*2**',minval(xi)
+      print*,'*2a*',minloc(xi)
+
       do j = number/2+1, number
         xi(m+1,j,:) = 0.
         xi1u(m+1,j,:) = 0.
@@ -1833,6 +1858,8 @@ c**********************************************
             x = xm+xr*points(j)
             xi(k+1,j,:) = (s(k,j,:)+q0m(k,j,:)+q1(k,j,:)-xi(k,j,:)
      $*(gg(j,:)/2.+x/dl))/(gg(j,:)/2.-x/dl)
+	    xi(k+1,j,:) = amin1(1000.,amax1(-1000.,xi(k+1,j,:)))
+
           end do
         end do
         ximt = 0.
@@ -1843,6 +1870,8 @@ c**********************************************
         end do
         do j = number/2+1, number
           xi(m+1,j,:) = ximt(1:nw)+xi1(1:nw)
+          xi(m+1,j,:) = amin1(1000.,amax1(-1000.,xi(m+1,j,:)))
+
         end do
         multl_s_3h(:,:,l+nlm*(ipt-1),:) = s
         do k = m, 1, -1
@@ -1851,11 +1880,16 @@ c**********************************************
             x = xm+xr*points(j)
             xi(k,j,:) = (s(k,j,:)+q0m(k,j,:)+q1(k,j,:)-xi(k+1,j,:)
      $*(gg(j,:)/2.-x/dl))/(gg(j,:)/2.+x/dl)
+	    xi(k,j,:) = amin1(1000.,amax1(-1000.,xi(k,j,:)))
+
           end do
         end do
         multl_xi_4h(:,:,l+nlm*(ipt-1),:) = xi
         do k = 1, m+1
           do j = 1, number
+	    if (j == 1) then
+	        print*,'****XI***',k,k,xi(k,j,:)
+	    endif
             xif(k,j,1:nw) = xi(k,j,:)
           end do
         end do
@@ -2030,6 +2064,9 @@ c      print*,'n nwands',nw
             xi1u(k,j,1:nw) = i00*xl*2.*xgama_0(j,:)*
      $exp(-(g0/xmu0*xl))/xmu0
           endif
+          xi(k,j,:) = amin1(1000.,amax1(-1000.,xi(k,j,:)))
+          xi1u(k,j,:) = amin1(1000.,amax1(-1000.,xi1u(k,j,:)))
+
         end do
       end do
       xi1 = 0.
@@ -2047,6 +2084,9 @@ c      print*,'n nwands',nw
           xi1u(k,j,1:nw) = i00*2.*xgama_0(j,:)*xmu0*
      $(exp(-(g0/xmu0*xl))-exp(-(gg(j,:)/x*(lai(1:nw)-xl)))*
      $exp(-(g0/xmu0*lai(1:nw))))/(g0*x+gg(j,:)*xmu0)
+          xi(k,j,:) = amin1(1000.,amax1(-1000.,xi(k,j,:)))
+          xi1u(k,j,:) = amin1(1000.,amax1(-1000.,xi1u(k,j,:)))
+
         end do
       end do
       do j = number/2+1, number
@@ -2078,6 +2118,7 @@ c      print*,'n nwands',nw
             x = xm+xr*points(j)
             xi(k+1,j,:) = (s(k,j,:)+q0m(k,j,:)+q1(k,j,:)-xi(k,j,:)
      $*(gg(j,:)/2.+x/dl))/(gg(j,:)/2.-x/dl)
+          xi(k+1,j,:) = amin1(1000.,amax1(-1000.,xi(k+1,j,:)))
           end do
         end do
         ximt = 0.
@@ -2087,12 +2128,14 @@ c      print*,'n nwands',nw
         end do
         do j = number/2+1, number
           xi(m+1,j,:) = ximt(1:nw)+xi1(1:nw)
+          xi(m+1,j,:) = amin1(1000.,amax1(-1000.,xi(m+1,j,:)))
         end do
         do k = m, 1, -1
           do j = number/2+1, number
             x = xm+xr*points(j)
             xi(k,j,:) = (s(k,j,:)+q0m(k,j,:)+q1(k,j,:)-xi(k+1,j,:)
      $*(gg(j,:)/2.-x/dl))/(gg(j,:)/2.+x/dl)
+          xi(k,j,:) = amin1(1000.,amax1(-1000.,xi(k,j,:)))
           end do
         end do
         nt = 0
@@ -2946,15 +2989,26 @@ c main code
         x = xm+xr*points(j)
         call fase_leaf(xgama_u(j,:),acos(x),teta_u)
       end do
+      print*,'m,nw',m,nw
       do k = 1, m
         sum = 0.
         do j = 1, number
+c	  print*,'j,number,points(j),xm,xr',j,number,points(j),xm,xr
           x = xm+xr*points(j)
+c	  print*,'xgama_u(j,:)',xgama_u(j,:)
+c	  print*,'weights(j)',weights(j)
+	  if (j == 1) then 
+		print*,k
+	  	print*,'xif(k+1,j,1:nw)',xif(k+1,j,1:nw)
+    	  endif
+c	  print*,'xif(k,j,1:nw)',xif(k,j,1:nw)
+c	  print*,'sum',sum
           sum = sum+2.*xgama_u(j,:)*xr*weights(j)*(xif(k+1,j,1:nw)
      $+xif(k,j,1:nw))/2.
         end do
         xsu(k,:) = sum
       end do
+c      print*,'xsu',xsu
       do k = m, 1, -1
         sum1 = 0.
         do j = number/2+1, number
@@ -2964,6 +3018,7 @@ c main code
         end do
         xq0u(k,:) = sum1
       end do
+c      print*,'xq0u',xq0u
       do k = 1, m
         sum2 = 0.
         do j = 1, number
@@ -2973,6 +3028,7 @@ c main code
         end do
         xq1(k,:) = sum2
       end do
+c      print*,'xq1',xq1
       call g_ross(gu,teta_u)
       mu = cos(teta_u)
       xim(m+1,:) = ximt(1:nw)+xi1(1:nw)
@@ -2982,9 +3038,13 @@ c main code
         bb = gu/2.+mu/dl
         xim(k,:) = (s1-xim(k+1,:)*aa)/bb
       end do
+c      print*,'xim',xim
       vrho_mult_nad = xim(1,:)/(2.*abs(cos(teta_0)))
+c      print*,'vrho_mult_nad',vrho_mult_nad
+c      print*,'xim(1,:)',xim(1,:)
+c      print*,'teta_0',teta_0
+c      print*,'(2.*abs(cos(teta_0)))',(2.*abs(cos(teta_0)))
       end  subroutine rho_mult_nad
-
 
       subroutine sun_fleckh_ad( sun_fleck_ad, teta_01 )
 c******************************************************************

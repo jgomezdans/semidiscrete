@@ -140,12 +140,18 @@ subroutine msnadimbrfmd(ipt,nbands,nl,nv,lad,kab,kar,kw,km,n,s1,s2,s3,s4,theta_i
       xrs(1:thisnbands) = pack(srefl,wavesamples /= 0)
       xrl(1:thisnbands) = pack(lrefl,wavesamples /= 0)
       xtl(1:thisnbands) = pack(ltrans,wavesamples /= 0)
-
+      print*,'xrs',xrs(1:thisnbands)
+      print*,'xrl',xrl(1:thisnbands)
+      print*,'xtl',xtl(1:thisnbands)
+      print*,'control',thisnbands,ipt,theta_i,phi_i,nv,theta_v,phi_v
+      print*,'values',lad,xhc,xlai,rpl
+      
       nw = thisnbands
       call nadimbrfmd(ipt,theta_i,phi_i,nv,theta_v,phi_v,lad,&
                       xrs(1:thisnbands),xhc,xlai,rpl,xrl(1:thisnbands),xtl(1:thisnbands),allbrf(:,1:thisnbands))
 ! now unpack for each waveband from allbrf(1,1:nw)
       somebrf(1:nw) = allbrf(1,1:nw)
+      print*,'somebrf',somebrf
       do j=1,nbands
         thisbandpass(:) = bandpass(j,:)
         field = 0.
