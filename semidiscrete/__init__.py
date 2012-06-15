@@ -7,7 +7,7 @@ import tempfile
 if os.name == 'nt': import win32api
 
 
-def _tmp_pkg(dir=None):
+def _tmp_pkg(dir="/tmp/"):
     """
     Create a temporary package.
 
@@ -21,7 +21,7 @@ def _tmp_pkg(dir=None):
             # if name is found, delete and try again
             os.rmdir(path)
         except:
-            break
+            break   
     init = file(os.path.join(path, '__init__.py'), 'w')
     init.close()
     return name, path

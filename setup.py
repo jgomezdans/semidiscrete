@@ -3,39 +3,36 @@ from numpy.distutils.core import setup
 import sys, os
 
 version = '1.0'
+from numpy.distutils.core import Extension
 
-def configuration ( parent_package='', top_path=None ):
-    from numpy.distutils.misc_util import Configuration
-    config = Configuration(parent_package=parent_package,top_path=top_path, )
-    
-    config.add_extension ('rtmodel_ad_trans2', 
-        sources = ['semidiscrete/rtmodel_ad_trans2.pyf', \
-        "semidiscrete/dataSpec_P5.f90",  "semidiscrete/leaf.f90", \
-        "semidiscrete/msnadimbrf_ad.f90", "semidiscrete/nadimmod_ad.f90", \
-        "semidiscrete/rtmodel_ad_trans.f90", "semidiscrete/soil.f90", \
-        "semidiscrete/tav_abs.f90", "semidiscrete/nadimbrf_ad.f",  \
-        "semidiscrete/nadimtools_ad.f" ] )
-    return config
+ext1 = Extension ( 'rtmodel_ad_trans2', \
+    sources = ['semidiscrete/rtmodel_ad_trans2.pyf', \
+    "semidiscrete/dataSpec_P5.f90",  "semidiscrete/leaf.f90", \
+    "semidiscrete/msnadimbrf_ad.f90", "semidiscrete/nadimmod_ad.f90", \
+    "semidiscrete/rtmodel_ad_trans.f90", "semidiscrete/soil.f90", \
+    "semidiscrete/tav_abs.f90", "semidiscrete/nadimbrf_ad.f",  \
+    "semidiscrete/nadimtools_ad.f" ] )
 
-
-# This is a hack, as F77/F90 flags can be passed in the config object
-# but only on recent versions of numpy/f2py
-sys.argv.extend ( ["config_fc", "--fcompiler=gnu95", 
+if __name__ == "__main__":
+    from numpy.distutils.core import setup
+    sys.argv.extend ( ["config_fc", "--fcompiler=gnu95", 
         "--f90exec=/usr/bin/gfortran44", 
-        "--f90flags='-ffixed-form -ffixed-line-length-none -fdefault-real-8 '"
-        "--f77flags='-ffixed-form -ffixed-line-length-none -fdefault-real-8 '" ])
-
-DISTNAME = 'semidiscrete'
-DESCRIPTION = 'SemiDiscrete python wrappers'
-LONG_DESCRIPTION = open('README.txt').read()
-MAINTAINER = 'Jose Gomez-Dans/NCEO & University College London'
-MAINTAINER_EMAIL = "j.gomez-dans@ucl.ac.uk"
-URL = 'http://github.com/jgomezdans/semidiscrete'
-LICENSE = 'Undecided'
-VERSION = "1.0.4"
-DOWNLOAD_URL="https://github.com/jgomezdans/semidiscrete/zipball/master"
-setup ( configuration = configuration,
-    name=DISTNAME,
+        "--f77exec=/usr/bin/gfortran44", 
+        "--f77flags='-ffixed-form -ffixed-line-length-none -fdefault-real-8 -O3 -march=native'"] )
+    #"--f77flags='-ffree-form -ffixed-line-length-none -fdefault-real-8 '"])
+    #"--f90flags='-ffree-form -ffixed-line-length-none -fdefault-real-8 '" ])
+    
+    DISTNAME = 'semidiscrete'
+    DESCRIPTION = 'SemiDiscrete python wrappers'
+    LONG_DESCRIPTION = open('README.txt').read()
+    MAINTAINER = 'Jose Gomez-Dans/NCEO & University College London'
+    MAINTAINER_EMAIL = "j.gomez-dans@ucl.ac.uk"
+    URL = 'http://github.com/jgomezdans/semidiscrete'
+    LICENSE = 'Undecided'
+    VERSION = "1.0.4"
+    DOWNLOAD_URL="https://github.com/jgomezdans/semidiscrete/zipball/master"
+    
+    setup ( name=DISTNAME,
     maintainer=MAINTAINER,
     maintainer_email=MAINTAINER_EMAIL,
     description=DESCRIPTION,
@@ -45,7 +42,9 @@ setup ( configuration = configuration,
     download_url=DOWNLOAD_URL,
     long_description=LONG_DESCRIPTION,
     packages=['semidiscrete'],
-    package_dir={'semidiscrete': 'semidiscrete'},
+    package_dir={'semidiscrete': '.'},
+    ext_modules = [ext1,],
+    ext_package="semidiscrete",
     classifiers=[
         'Intended Audience :: Science/Research',
         'Intended Audience :: Developers',
@@ -59,5 +58,4 @@ setup ( configuration = configuration,
         'Operating System :: Unix',
         'Operating System :: MacOS'
         ]
-)
-    
+    )
