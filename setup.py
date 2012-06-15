@@ -21,8 +21,9 @@ def configuration ( parent_package='', top_path=None ):
 # This is a hack, as F77/F90 flags can be passed in the config object
 # but only on recent versions of numpy/f2py
 sys.argv.extend ( ["config_fc", "--fcompiler=gnu95", 
-        #"--f90exec=/usr/bin/gfortran44", 
-        "--f77flags='-ffixed-form -ffixed-line-length-none'" ])
+        "--f90exec=/usr/bin/gfortran44", 
+        "--f90flags='-ffixed-form -ffixed-line-length-none -fdefault-real-8 '"
+        "--f77flags='-ffixed-form -ffixed-line-length-none -fdefault-real-8 '" ])
 
 DISTNAME = 'semidiscrete'
 DESCRIPTION = 'SemiDiscrete python wrappers'
