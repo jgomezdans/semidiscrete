@@ -88,8 +88,6 @@
       xs3 =x(11)
       xs4 =x(12)
       lad = int(x(13)+0.5)
-      print*,x(1),x(2),x(3),x(4),x(5),x(6),x(7),x(8),x(9),x(10),x(11),x(12),x(13)
-      print*,'values',xlai,xhc,rpl,xkab,xkab,xkar,xkar,xkw,xkw,xkm,xkm,xleafn,xs1,xs2,xs3,xs4,lad
       end subroutine mo_rtload
 ! interface fn that doesnt require the module to be loaded
       end module mo_rtmodel
@@ -104,8 +102,6 @@ subroutine rt_modelpre(nbands_to_use,bands_to_use)
       integer bands_to_use(nbands_to_use)
       nwmax = nbands_to_use
       nwmaxx = nbands_to_use
-      print*, nbands_to_use
-      print*, bands_to_use
       call leafprep(nbands_to_use,bands_to_use)
       call nad_allocate(nbands_to_use)
 end subroutine rt_modelpre

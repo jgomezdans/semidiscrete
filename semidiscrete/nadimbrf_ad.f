@@ -265,10 +265,6 @@ c**********************************************
         call rho_0_nad(r1,teta(i),phi(i),x_lambda_i)
         call rho_1_nad(r2,teta(i),phi(i),x_lambda_i)
         call rho_mult_nad(r3,teta(i))
-        print*,'r1',r1
-        print*,'r2',r2
-        print*,'r3',r3
-
         brf(i,:)= r3+r1+r2
       end do
       end subroutine nadimbrfmd

@@ -22,14 +22,14 @@ if __name__ == "__main__":
     #"--f77flags='-ffree-form -ffixed-line-length-none -fdefault-real-8 '"])
     #"--f90flags='-ffree-form -ffixed-line-length-none -fdefault-real-8 '" ])
     
-    DISTNAME = 'semidiscrete'
+    DISTNAME = 'semidiscrete1'
     DESCRIPTION = 'SemiDiscrete python wrappers'
     LONG_DESCRIPTION = open('README.txt').read()
     MAINTAINER = 'Jose Gomez-Dans/NCEO & University College London'
     MAINTAINER_EMAIL = "j.gomez-dans@ucl.ac.uk"
     URL = 'http://github.com/jgomezdans/semidiscrete'
     LICENSE = 'Undecided'
-    VERSION = "1.0.4"
+    VERSION = "1.0.1"
     DOWNLOAD_URL="https://github.com/jgomezdans/semidiscrete/zipball/master"
     
     setup ( name=DISTNAME,
@@ -41,10 +41,10 @@ if __name__ == "__main__":
     version=VERSION,
     download_url=DOWNLOAD_URL,
     long_description=LONG_DESCRIPTION,
-    packages=['semidiscrete'],
-    package_dir={'semidiscrete': '.'},
+    packages=['semidiscrete1'],
+    package_dir={'semidiscrete1': '.'},
     ext_modules = [ext1,],
-    ext_package="semidiscrete",
+    ext_package="semidiscrete1",
     classifiers=[
         'Intended Audience :: Science/Research',
         'Intended Audience :: Developers',

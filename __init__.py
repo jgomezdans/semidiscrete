@@ -4,6 +4,7 @@ import os.path
 import shutil
 import sys
 import tempfile
+from rtmodel_ad_trans2 import *
 if os.name == 'nt': import win32api
 
 
