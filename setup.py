@@ -16,8 +16,6 @@ ext1 = Extension ( 'rtmodel_ad_trans2', \
 if __name__ == "__main__":
     from numpy.distutils.core import setup
     sys.argv.extend ( ["config_fc", "--fcompiler=gnu95", 
-#        "--f90exec=/usr/bin/gfortran44", 
-#        "--f77exec=/usr/bin/gfortran44", 
         "--f90flags=' -fdefault-real-8 -O3'",
         "--f77flags='-ffixed-form -ffixed-line-length-none -fdefault-real-8 -O3'"] )
     #"--f77flags='-ffree-form -ffixed-line-length-none -fdefault-real-8 '"])
@@ -30,7 +28,7 @@ if __name__ == "__main__":
     MAINTAINER_EMAIL = "j.gomez-dans@ucl.ac.uk"
     URL = 'http://github.com/jgomezdans/semidiscrete'
     LICENSE = 'Undecided'
-    VERSION = "1.0.3"
+    VERSION = "1.0.4"
     DOWNLOAD_URL="https://github.com/jgomezdans/semidiscrete/zipball/master"
     
     setup ( name=DISTNAME,
