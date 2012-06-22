@@ -21,7 +21,7 @@ if __name__ == "__main__":
     #"--f77flags='-ffree-form -ffixed-line-length-none -fdefault-real-8 '"])
     #"--f90flags='-ffree-form -ffixed-line-length-none -fdefault-real-8 '" ])
     
-    DISTNAME = 'semidiscrete1'
+    DISTNAME = 'semidiscrete'
     DESCRIPTION = 'SemiDiscrete python wrappers'
     LONG_DESCRIPTION = open('README.txt').read()
     MAINTAINER = 'Jose Gomez-Dans/NCEO & University College London'
@@ -40,10 +40,10 @@ if __name__ == "__main__":
     version=VERSION,
     download_url=DOWNLOAD_URL,
     long_description=LONG_DESCRIPTION,
-    packages=['semidiscrete1'],
-    package_dir={'semidiscrete1': '.'},
+    packages=['semidiscrete'],
+    package_dir={'semidiscrete': '.'},
     ext_modules = [ext1,],
-    ext_package="semidiscrete1",
+    ext_package="semidiscrete",
     classifiers=[
         'Intended Audience :: Science/Research',
         'Intended Audience :: Developers',
