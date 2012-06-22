@@ -17,7 +17,8 @@ if __name__ == "__main__":
     from numpy.distutils.core import setup
     sys.argv.extend ( ["config_fc", "--fcompiler=gnu95", 
         "--f90flags=' -fdefault-double-8 -fdefault-real-8 -O3'",
-        "--f77flags='-ffixed-form -ffixed-line-length-none -fdefault-real-8 -O3'"] )
+        "--f77flags='-ffixed-form -ffixed-line-length-none " + \
+	"-fdefault-real-8 -fdefault-double-8 -O3'"] )
     #"--f77flags='-ffree-form -ffixed-line-length-none -fdefault-real-8 '"])
     #"--f90flags='-ffree-form -ffixed-line-length-none -fdefault-real-8 '" ])
     
